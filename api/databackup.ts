@@ -13,13 +13,14 @@ router.get("/",(req,res)=>{
         });
 });
 
-router.post("/",(req,res)=>{
+router.post("/upBack/:did",(req,res)=>{
     let body : backup =  req.body;
-    let sql = 'INSERT INTO `score`(`score_v`, `did`, `date`) VALUES(?,?,?)';
+    let did = req.params.did;
+    let sql = 'INSERT INTO `score`(`score_v`, `did`, `date`) VALUES(?, ? ,?)';
     sql = mysql.format(sql,[
         body.score_v,
-        body.did,
-        body.date,
+        did,
+        new Date().toISOString().slice(0, 10)
     ]);
     conn.query(sql,(err,result)=>{
         if(err) throw err ;
