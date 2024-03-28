@@ -24,14 +24,24 @@ router.get("/:user/:password", (req, res) => {
         res.status(200).json(result);
     });
 });
+
+// uid
+router.get("/inputuid/:uid",(req,res)=>{
+    let id = req.params.uid;
+    conn.query("SELECT * FROM user WHERE uid = ?" , [id], (err, result, fields) => {
+    if (err) throw err;
+        res.json(result);
+    });
+});
+
 //create user || resigtration
 router.post("/",(req,res)=>{
     let body : User =  req.body;
-    let sql = 'INSERT INTO `user` (`username`, `password`) VALUES (?,?)';
-   
+    let sql = 'INSERT INTO `user` (name,`username`, `password`,status) VALUES (?,?,?,"user")';
     sql = mysql.format(sql,[
+        body.name,
         body.username,
-        body.password
+        body.password,
     ]);
     conn.query(sql,(err,result)=>{
         if(err) throw err ;
