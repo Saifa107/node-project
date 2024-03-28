@@ -13,9 +13,10 @@ router.get("/",(req,res)=>{
 });
 
 //เพื่มเมื่อคลิก
-router.put("/scors/:did",(req,res)=>{
+router.put("/scors/:did/:scorse",(req,res)=>{
     let id = req.params.did;
-    let sql = mysql.format('UPDATE `Images` SET `vote_count`= vote_count+1 WHERE did = ?',[id]);
+    let scors = req.params.scorse;
+    let sql = mysql.format('UPDATE `Images` SET `vote_count`= vote_count+? WHERE did = ?',[scors,id]);
     conn.query(sql,(err,result)=>{
         if (err) {
             throw err;
@@ -29,9 +30,10 @@ router.put("/scors/:did",(req,res)=>{
     });
 });
 //ลดเมื่อแพ้
-router.put("lose/:did",(req,res)=>{
+router.put("lose/:did/:scorse",(req,res)=>{
     let id = req.params.did;
-    let sql = mysql.format('PDATE `Images` SET `vote_count`= vote_count-1 WHERE did = ? and vote_count > 0',[id]);
+    let scors = req.params.scorse;
+    let sql = mysql.format('UPDATE `Images` SET `vote_count`= vote_count-1 WHERE did = ? and vote_count > 0',[scors,id]);
     conn.query(sql,(err,result)=>{
         if (err) {
             throw err;
