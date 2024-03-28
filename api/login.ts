@@ -29,7 +29,7 @@ router.get("/:user/:password", (req, res) => {
 router.get("/inputuid/:uid",(req,res)=>{
     let id = req.params.uid;
     conn.query("SELECT * FROM user WHERE uid = ?" , [id], (err, result, fields) => {
-    if (err) throw err;
+        if (err) throw err;
         res.json(result);
     });
 });
