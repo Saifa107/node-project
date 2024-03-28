@@ -16,7 +16,7 @@ router.get("/",(req,res)=>{
 router.put("/scors/:did/:scorse",(req,res)=>{
     let id = req.params.did;
     let scors = req.params.scorse;
-    let sql = mysql.format('UPDATE `Images` SET `vote_count`= vote_count+? WHERE did = ?',[scors,id]);
+    let sql = mysql.format('UPDATE `Images` SET `vote_count`= ? WHERE did = ?',[scors,id]);
     conn.query(sql,(err,result)=>{
         if (err) {
             throw err;
@@ -32,14 +32,14 @@ router.put("/scors/:did/:scorse",(req,res)=>{
 //ลดเมื่อแพ้
 router.put("lose/:did/:scorse",(req,res)=>{
     let id = req.params.did;
-    let scors = req.params.scorse;
-    let sql = mysql.format('UPDATE `Images` SET `vote_count`= vote_count-1 WHERE did = ? and vote_count > 0',[scors,id]);
+    let data : vote = req.body;
+    let sql = mysql.format('UPDATE `Images` SET `vote_count`= vote_count-1 WHERE did = ? and vote_count > 0',[data.vote_count,id]);
     conn.query(sql,(err,result)=>{
         if (err) {
             throw err;
         } else {
             if (result.affectedRows > 0) {
-                res.status(200).json({ message: "ศose vote", affected_rows: result.affectedRows });
+                res.status(200).json({ message: "lose vote", affected_rows: result.affectedRows });
             } else {
                 res.status(404).json({ message: "No record found for the given ID" });
             }
