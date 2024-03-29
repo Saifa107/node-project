@@ -120,7 +120,7 @@ router.post("/uploadMySql", async (req,res)=>{
 router.put("/ChangeImage/:did", async (req,res)=>{
     let uid = req.params.did;
     let body : vote = req.body;
-    let sql = 'UPDATE `Images` SET `img`=?,`uid`=? ,vote_count = 0 WHERE did=?';
+    let sql = 'UPDATE `Images` SET `img`=?,`uid`=? ,vote_count = 100 WHERE did=?';
     sql = mysql.format(sql,[
        body.img,
        body.uid,
