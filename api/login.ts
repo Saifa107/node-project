@@ -13,6 +13,14 @@ router.get("/",(req,res)=>{
           res.json(result);
         });
 });
+// เอาแค่ user
+router.get("/outUid",(req,res)=>{
+        console.log()
+    conn.query('select * from `user` Where status = "user"', (err, result, fields)=>{
+        if(err) throw err;
+          res.json(result);
+        });
+});
 //login
 router.get("/:user/:password", (req, res) => {
     let username = req.params.user;
@@ -24,11 +32,19 @@ router.get("/:user/:password", (req, res) => {
         res.status(200).json(result);
     });
 });
-
+router.get("/profileImage/:User",(req,res)=>{
+    let id = req.params.User;
+    console.log(id);
+    conn.query("select * from user,Images where user.uid = Images.uid and user.uid = ?",[id],(err,result,fields)=>{
+        if (err) throw err;
+        res.json(result);
+    });
+});
 
 //create user || resigtration
 router.post("/",(req,res)=>{
     let body : User =  req.body;
+
     let sql = 'INSERT INTO `user` (name,`username`, `password`,status) VALUES (?,?,?,"user")';
     sql = mysql.format(sql,[
         body.name,
