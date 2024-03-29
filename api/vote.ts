@@ -15,6 +15,8 @@ router.get("/",(req,res)=>{
 //เพื่มเมื่อคลิก
 router.put("/scors/:did/:scorse",(req,res)=>{
     let id = req.params.did;
+    console.log("id: ="+id);
+    
     let scors = req.params.scorse;
     let sql = mysql.format('UPDATE `Images` SET `vote_count`= ? WHERE did = ?',[scors,id]);
     conn.query(sql,(err,result)=>{

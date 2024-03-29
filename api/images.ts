@@ -89,6 +89,17 @@ router.get("/ImageCount/:uid", (req,res)=>{
     });
 });
 
+// ดึงข้อมูลผู้ใช้จากรุปภาพ
+router.get("/user/:did", (req,res)=>{
+    let id = req.params.did;
+    let sql_count_did = 'SELECT user.* FROM user JOIN Images ON user.uid = Images.uid WHERE Images.did = ?';
+    sql_count_did = mysql.format(sql_count_did,[id]);
+    conn.query(sql_count_did,(err,result)=>{
+        if(err) throw err;
+        res.json(result);
+    });
+});
+
 router.post("/uploadMySql", async (req,res)=>{
     let body : vote = req.body;
     console.log(body);

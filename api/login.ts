@@ -25,14 +25,7 @@ router.get("/:user/:password", (req, res) => {
     });
 });
 
-// uid
-router.get("/inputuid/:uid",(req,res)=>{
-    let id = req.params.uid;
-    conn.query("SELECT * FROM user WHERE uid = ?" , [id], (err, result, fields) => {
-    if (err) throw err;
-        res.json(result);
-    });
-});
+
 
 //create user || resigtration
 router.post("/",(req,res)=>{
@@ -51,6 +44,7 @@ router.post("/",(req,res)=>{
        
     });
 });
+
 //update profile
 router.put("/profile/:id", async(req,res)=>{
     let uid = req.params.id;
