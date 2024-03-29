@@ -21,6 +21,7 @@ router.get("/outUid",(req,res)=>{
           res.json(result);
         });
 });
+
 //login
 router.get("/:user/:password", (req, res) => {
     let username = req.params.user;
@@ -50,7 +51,7 @@ router.post("/",(req,res)=>{
         body.name,
         body.username,
         body.password,
-        
+
     ]);
     conn.query(sql,(err,result)=>{
         if(err) throw err ;
