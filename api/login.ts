@@ -34,6 +34,7 @@ router.post("/",(req,res)=>{
         body.name,
         body.username,
         body.password,
+        
     ]);
     conn.query(sql,(err,result)=>{
         if(err) throw err ;
