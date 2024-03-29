@@ -26,7 +26,6 @@ router.get("/:user/:password", (req, res) => {
 });
 
 
-
 //create user || resigtration
 router.post("/",(req,res)=>{
     let body : User =  req.body;

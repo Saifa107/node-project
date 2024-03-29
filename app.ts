@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { router as login } from "./api/login"
 import { router as vote } from "./api/vote";
 import { router as images } from "./api/images";
+import { router as databackup } from "./api/databackup";
 
 
 
@@ -19,6 +20,7 @@ app.use(
 app.use("/login",login);
 app.use("/vote",vote);
 app.use("/images",images);
+app.use("/backup",databackup);
 
 
 app.use((req,res)=>{
