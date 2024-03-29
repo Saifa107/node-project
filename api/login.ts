@@ -32,6 +32,7 @@ router.get("/:user/:password", (req, res) => {
         res.status(200).json(result);
     });
 });
+
 router.get("/profileImage/:User",(req,res)=>{
     let id = req.params.User;
     console.log(id);
